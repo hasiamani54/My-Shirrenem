@@ -13,26 +13,60 @@ body{
     justify-content:center;
     align-items:center;
     background: linear-gradient(135deg,#ffc0cb,#ffe6f0,#ffb6c1);
-    font-family: 'Segoe UI', sans-serif;
+    font-family: system-ui, sans-serif;
     overflow:hidden;
+}
+
+/* Floating Hearts */
+.heart{
+    position:absolute;
+    font-size:18px;
+    animation: float 6s linear infinite;
+    pointer-events:none;
+}
+@keyframes float{
+    from{transform:translateY(110vh);}
+    to{transform:translateY(-10vh);}
+}
+
+/* Sparkles */
+.sparkle{
+    position:absolute;
+    font-size:14px;
+    pointer-events:none;
+    animation: sparkleFloat 4s ease-out forwards;
+}
+@keyframes sparkleFloat{
+    0%{transform:scale(0.5); opacity:0;}
+    50%{opacity:1;}
+    100%{transform:translateY(-40px) scale(1.2); opacity:0;}
+}
+
+/* Screens */
+.screen{
+    width:min(92vw,520px);
+    transition:.5s ease;
+}
+.hidden{
+    opacity:0;
+    pointer-events:none;
+    position:absolute;
 }
 
 /* Envelope */
 .envelope-wrapper{
     position:relative;
-    width:300px;
-    height:200px;
+    width:320px;
+    height:210px;
     cursor:pointer;
 }
-
 .envelope{
     position:absolute;
     width:100%;
     height:100%;
     background:#ff6f91;
-    border-radius:10px;
+    border-radius:15px;
 }
-
 .flap{
     position:absolute;
     width:100%;
@@ -40,89 +74,104 @@ body{
     background:#ff4d88;
     clip-path: polygon(0 0, 50% 60%, 100% 0);
     transform-origin: top;
-    transition: 1.5s ease;
+    transition:1.2s ease;
 }
-
 .open .flap{
-    transform: rotateX(180deg);
+    transform:rotateX(180deg);
 }
-
-.letter{
+.seal{
     position:absolute;
-    width:90%;
-    height:90%;
-    background:white;
-    top:5%;
-    left:5%;
-    border-radius:10px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:15px;
+    left:50%;
+    top:55%;
+    transform:translate(-50%,-50%);
+    font-size:30px;
+}
+.tap{
     text-align:center;
-    opacity:0;
-    transform: translateY(20px);
-    transition: 1.5s ease;
+    margin-top:20px;
+    font-weight:bold;
+    color:#5a1a2b;
 }
 
-.open .letter{
-    opacity:1;
-    transform: translateY(0);
+/* Letter Card */
+.card{
+    background:rgba(255,255,255,0.9);
+    padding:20px;
+    border-radius:25px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.18);
 }
-
-img{
+.photo img{
     width:100%;
+    border-radius:18px;
+    margin-bottom:15px;
+}
+.line{
+    opacity:0;
+    transform:translateY(10px);
+    transition:.5s ease;
+    background:white;
+    padding:10px;
     border-radius:15px;
-    margin-bottom:15px;
+    margin:8px 0;
+    font-weight:600;
 }
-
-h1{
-    font-size:1.3rem;
-    margin-bottom:8px;
+.line.show{
+    opacity:1;
+    transform:translateY(0);
 }
-
-p{
-    margin-bottom:15px;
+.signature{
+    margin-top:10px;
+    font-weight:900;
+    color:#ff2d78;
+    text-align:center;
 }
-
 button{
-    padding:10px 18px;
+    width:100%;
+    margin-top:15px;
+    padding:12px;
     border:none;
-    border-radius:12px;
+    border-radius:15px;
     background:#ff4d88;
     color:white;
     font-weight:bold;
     cursor:pointer;
 }
-
 button:hover{
     background:#ff1f6b;
-}
-
-/* floating hearts */
-.heart{
-    position:absolute;
-    font-size:18px;
-    animation: float 6s linear infinite;
-}
-
-@keyframes float{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-10vh);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="envelope-wrapper" id="envelope">
-    <div class="envelope"></div>
-    <div class="flap"></div>
-    <div class="letter">
-        <img src="us.jpeg" alt="Us">
-        <h1>You’re my forever Valentine.</h1>
-        <p>Happy 2026 Valentine’s Day Shirrenem ❤️ I love you so much </p>
+<audio id="bgMusic" src="love.mp3" preload="auto"></audio>
+
+<div class="screen" id="screen1">
+    <div class="envelope-wrapper" id="envelope">
+        <div class="envelope"></div>
+        <div class="flap"></div>
+        <div class="seal">💌</div>
+    </div>
+    <div class="tap">Tap to open 💘</div>
+</div>
+
+<div class="screen hidden" id="screen2">
+    <div class="card">
+        <div class="photo">
+            <img src="us.jpeg" alt="Us">
+        </div>
+
+        <div class="line">You light up my world like no one else has</div>
+        <div class="line">With you time goes by so fast</div>
+        <div class="line">I want to spend every living day with you up until our last</div>
+        <div class="line">You give me more motivation in the gym to push more mass</div>
+        <div class="line">I love you so much it feels so good to say</div>
+        <div class="line">I love talking to you every single day</div>
+        <div class="line">I love you especially from April till May</div>
+        <div class="line">I love you so much even though I drive you cray-cray</div>
+
+        <div class="signature">Zahnakah Jaanem ❤️</div>
+
         <button onclick="window.location.href='https://github.com/hasiamani54/My-Shirrenem'">
             Click Here 💘
         </button>
@@ -130,25 +179,66 @@ button:hover{
 </div>
 
 <script>
-// auto open after 5 seconds
-setTimeout(() => {
-    document.getElementById("envelope").classList.add("open");
-}, 5000);
-
 // floating hearts
 function createHeart(){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
+    const heart=document.createElement("div");
+    heart.className="heart";
     heart.innerHTML="❤️";
-    heart.style.left = Math.random()*100 + "vw";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*10+15)+"px";
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),6000);
 }
+setInterval(createHeart,600);
 
-setInterval(createHeart,500);
+// glitter burst
+function glitterBurst(){
+    for(let i=0;i<40;i++){
+        const sparkle=document.createElement("div");
+        sparkle.className="sparkle";
+        sparkle.innerHTML="✨";
+        sparkle.style.left="50%";
+        sparkle.style.top="50%";
+        sparkle.style.position="absolute";
+        sparkle.style.transform=`translate(-50%,-50%) rotate(${Math.random()*360}deg)`;
+        sparkle.style.left=(50+Math.random()*20-10)+"vw";
+        sparkle.style.top=(50+Math.random()*20-10)+"vh";
+        document.body.appendChild(sparkle);
+        setTimeout(()=>sparkle.remove(),4000);
+    }
+}
+
+// tap action
+const envelope=document.getElementById("envelope");
+const screen1=document.getElementById("screen1");
+const screen2=document.getElementById("screen2");
+const music=document.getElementById("bgMusic");
+
+function revealLines(){
+    const lines=document.querySelectorAll(".line");
+    lines.forEach((line,i)=>{
+        setTimeout(()=>line.classList.add("show"),i*700);
+    });
+}
+
+envelope.addEventListener("click",()=>{
+    envelope.classList.add("open");
+
+    // start music after tap
+    music.play().catch(()=>{});
+
+    glitterBurst();
+
+    setTimeout(()=>{
+        screen1.classList.add("hidden");
+        screen2.classList.remove("hidden");
+        revealLines();
+    },1000);
+});
 </script>
 
 </body>
 </html>
+
 
 
