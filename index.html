@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Shirrenem 💌</title>
+<title>Happy 2026 Valentine's Day ❤️</title>
 
 <style>
 body{
@@ -13,7 +13,7 @@ body{
     justify-content:center;
     align-items:center;
     background: linear-gradient(135deg,#ffc0cb,#ffe6f0,#ffb6c1);
-    font-family: system-ui, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     overflow:hidden;
 }
 
@@ -29,22 +29,22 @@ body{
     to{transform:translateY(-10vh);}
 }
 
-/* Sparkles */
+/* Glitter */
 .sparkle{
     position:absolute;
-    font-size:14px;
-    pointer-events:none;
+    font-size:16px;
     animation: sparkleFloat 4s ease-out forwards;
+    pointer-events:none;
 }
 @keyframes sparkleFloat{
-    0%{transform:scale(0.5); opacity:0;}
+    0%{opacity:0; transform:scale(0.5);}
     50%{opacity:1;}
-    100%{transform:translateY(-40px) scale(1.2); opacity:0;}
+    100%{opacity:0; transform:translateY(-40px) scale(1.2);}
 }
 
 /* Screens */
 .screen{
-    width:min(92vw,520px);
+    width:min(92vw,550px);
     transition:.5s ease;
 }
 .hidden{
@@ -90,50 +90,63 @@ body{
     text-align:center;
     margin-top:20px;
     font-weight:bold;
-    color:#5a1a2b;
 }
 
 /* Letter Card */
 .card{
-    background:rgba(255,255,255,0.9);
-    padding:20px;
-    border-radius:25px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.18);
+    background:rgba(255,255,255,0.95);
+    padding:25px;
+    border-radius:30px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.2);
+    text-align:center;
 }
+
+.header{
+    font-size:1.6rem;
+    font-weight:900;
+    color:#ff2d78;
+    margin-bottom:15px;
+    text-shadow:0 0 15px rgba(255,77,136,0.4);
+}
+
 .photo img{
     width:100%;
-    border-radius:18px;
-    margin-bottom:15px;
+    border-radius:20px;
+    margin-bottom:20px;
 }
+
 .line{
     opacity:0;
-    transform:translateY(10px);
-    transition:.5s ease;
-    background:white;
-    padding:10px;
-    border-radius:15px;
-    margin:8px 0;
-    font-weight:600;
+    transform:translateY(15px);
+    transition:.6s ease;
+    padding:12px 18px;
+    border-radius:20px;
+    margin:10px auto;
+    max-width:90%;
+    font-size:1.05rem;
 }
 .line.show{
     opacity:1;
     transform:translateY(0);
 }
+
 .signature{
-    margin-top:10px;
+    margin-top:15px;
+    font-size:1.2rem;
     font-weight:900;
     color:#ff2d78;
-    text-align:center;
 }
+
 button{
     width:100%;
-    margin-top:15px;
-    padding:12px;
+    margin-top:20px;
+    padding:14px;
     border:none;
-    border-radius:15px;
+    border-radius:20px;
     background:#ff4d88;
     color:white;
     font-weight:bold;
+    font-size:1rem;
     cursor:pointer;
 }
 button:hover{
@@ -157,6 +170,11 @@ button:hover{
 
 <div class="screen hidden" id="screen2">
     <div class="card">
+
+        <div class="header">
+            Happy 2026 Valentine’s Day Shirrenem ❤️ I Love You
+        </div>
+
         <div class="photo">
             <img src="us.jpeg" alt="Us">
         </div>
@@ -175,11 +193,11 @@ button:hover{
         <button onclick="window.location.href='https://github.com/hasiamani54/My-Shirrenem'">
             Click Here 💘
         </button>
+
     </div>
 </div>
 
 <script>
-// floating hearts
 function createHeart(){
     const heart=document.createElement("div");
     heart.className="heart";
@@ -191,16 +209,11 @@ function createHeart(){
 }
 setInterval(createHeart,600);
 
-// glitter burst
 function glitterBurst(){
-    for(let i=0;i<40;i++){
+    for(let i=0;i<35;i++){
         const sparkle=document.createElement("div");
         sparkle.className="sparkle";
         sparkle.innerHTML="✨";
-        sparkle.style.left="50%";
-        sparkle.style.top="50%";
-        sparkle.style.position="absolute";
-        sparkle.style.transform=`translate(-50%,-50%) rotate(${Math.random()*360}deg)`;
         sparkle.style.left=(50+Math.random()*20-10)+"vw";
         sparkle.style.top=(50+Math.random()*20-10)+"vh";
         document.body.appendChild(sparkle);
@@ -208,7 +221,6 @@ function glitterBurst(){
     }
 }
 
-// tap action
 const envelope=document.getElementById("envelope");
 const screen1=document.getElementById("screen1");
 const screen2=document.getElementById("screen2");
@@ -217,18 +229,14 @@ const music=document.getElementById("bgMusic");
 function revealLines(){
     const lines=document.querySelectorAll(".line");
     lines.forEach((line,i)=>{
-        setTimeout(()=>line.classList.add("show"),i*700);
+        setTimeout(()=>line.classList.add("show"),i*800);
     });
 }
 
 envelope.addEventListener("click",()=>{
     envelope.classList.add("open");
-
-    // start music after tap
     music.play().catch(()=>{});
-
     glitterBurst();
-
     setTimeout(()=>{
         screen1.classList.add("hidden");
         screen2.classList.remove("hidden");
@@ -239,6 +247,3 @@ envelope.addEventListener("click",()=>{
 
 </body>
 </html>
-
-
-
